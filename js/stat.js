@@ -34,21 +34,21 @@ window.renderStatistics = function (ctx) {
 
   ctx.fillStyle = PLAYER_BAR_COLOR;
   ctx.fillText(players[0], CLOUD_X + X_GAP, CLOUD_Y + Y_GAP + FONT_GAP + BAR_CHART_GAP);
-  ctx.fillText(times[0], CLOUD_X + X_GAP, CLOUD_Y + Y_GAP + 2 * FONT_GAP + BAR_CHART_HEIGHT - Math.round(times[0] * BAR_CHART_HEIGHT / Math.max.apply(null, times)) - TIME_GAP);
+  ctx.fillText(Math.round(times[0]), CLOUD_X + X_GAP, CLOUD_Y + Y_GAP + 2 * FONT_GAP + BAR_CHART_HEIGHT - Math.round(times[0] * BAR_CHART_HEIGHT / Math.max.apply(null, times)) - TIME_GAP);
   ctx.fillRect(CLOUD_X + X_GAP, CLOUD_Y + Y_GAP + 2 * FONT_GAP + BAR_CHART_HEIGHT - Math.round(times[0] * BAR_CHART_HEIGHT / Math.max.apply(null, times)), BAR_WIDTH, Math.round(times[0] * BAR_CHART_HEIGHT / Math.max.apply(null, times)));
 
   ctx.fillStyle = PLAYERS_BAR_COLOR;
   ctx.fillText(players[1], CLOUD_X + X_GAP + BAR_WIDTH + BAR_GAP, CLOUD_Y + Y_GAP + FONT_GAP + BAR_CHART_GAP);
-  ctx.fillText(times[1], CLOUD_X + X_GAP + BAR_WIDTH + BAR_GAP, CLOUD_Y + Y_GAP + 2 * FONT_GAP + BAR_CHART_HEIGHT - Math.round(times[1] * BAR_CHART_HEIGHT / Math.max.apply(null, times)) - TIME_GAP);
+  ctx.fillText(Math.round(times[1]), CLOUD_X + X_GAP + BAR_WIDTH + BAR_GAP, CLOUD_Y + Y_GAP + 2 * FONT_GAP + BAR_CHART_HEIGHT - Math.round(times[1] * BAR_CHART_HEIGHT / Math.max.apply(null, times)) - TIME_GAP);
   ctx.fillRect(CLOUD_X + X_GAP + BAR_WIDTH + BAR_GAP, CLOUD_Y + Y_GAP + 2 * FONT_GAP + BAR_CHART_HEIGHT - Math.round(times[1] * BAR_CHART_HEIGHT / Math.max.apply(null, times)), BAR_WIDTH, Math.round(times[1] * BAR_CHART_HEIGHT / Math.max.apply(null, times)));
 
   ctx.fillStyle = PLAYERS_BAR_COLOR;
   ctx.fillText(players[2], CLOUD_X + X_GAP + 2 * (BAR_WIDTH + BAR_GAP), CLOUD_Y + Y_GAP + FONT_GAP + BAR_CHART_GAP);
-  ctx.fillText(times[2], CLOUD_X + X_GAP + 2 * (BAR_WIDTH + BAR_GAP), CLOUD_Y + Y_GAP + 2 * FONT_GAP + BAR_CHART_HEIGHT - Math.round(times[2] * BAR_CHART_HEIGHT / Math.max.apply(null, times)) - TIME_GAP);
+  ctx.fillText(Math.round(times[2]), CLOUD_X + X_GAP + 2 * (BAR_WIDTH + BAR_GAP), CLOUD_Y + Y_GAP + 2 * FONT_GAP + BAR_CHART_HEIGHT - Math.round(times[2] * BAR_CHART_HEIGHT / Math.max.apply(null, times)) - TIME_GAP);
   ctx.fillRect(CLOUD_X + X_GAP + 2 * (BAR_WIDTH + BAR_GAP), CLOUD_Y + Y_GAP + 2 * FONT_GAP + BAR_CHART_HEIGHT - Math.round(times[2] * BAR_CHART_HEIGHT / Math.max.apply(null, times)), BAR_WIDTH, Math.round(times[2] * BAR_CHART_HEIGHT / Math.max.apply(null, times)));
 
   ctx.fillStyle = PLAYERS_BAR_COLOR;
   ctx.fillText(players[3], CLOUD_X + X_GAP + 3 * (BAR_WIDTH + BAR_GAP), CLOUD_Y + Y_GAP + FONT_GAP + BAR_CHART_GAP);
-  ctx.fillText(times[3], CLOUD_X + X_GAP + 3 * (BAR_WIDTH + BAR_GAP), CLOUD_Y + Y_GAP + 2 * FONT_GAP + BAR_CHART_HEIGHT - Math.round(times[3] * BAR_CHART_HEIGHT / Math.max.apply(null, times)) - TIME_GAP);
+  ctx.fillText(Math.round(times[3]), CLOUD_X + X_GAP + 3 * (BAR_WIDTH + BAR_GAP), CLOUD_Y + Y_GAP + 2 * FONT_GAP + BAR_CHART_HEIGHT - Math.round(times[3] * BAR_CHART_HEIGHT / Math.max.apply(null, times)) - TIME_GAP);
   ctx.fillRect(CLOUD_X + X_GAP + 3 * (BAR_WIDTH + BAR_GAP), CLOUD_Y + Y_GAP + 2 * FONT_GAP + BAR_CHART_HEIGHT - Math.round(times[3] * BAR_CHART_HEIGHT / Math.max.apply(null, times)), BAR_WIDTH, Math.round(times[3] * BAR_CHART_HEIGHT / Math.max.apply(null, times)));
 };
