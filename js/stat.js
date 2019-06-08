@@ -15,8 +15,8 @@ var BAR_GAP = 50;
 var TIME_GAP = 5;
 var PLAYER_BAR_COLOR = 'rgba(255, 0, 0, 1)';
 var PLAYERS_BAR_COLOR = 'rgba(0,0,255,';
-var players = ['Вы', 'Иван', 'Юлия', 'Анна'];
-var times = [2500, 3000, 2000, 6000];
+var names = ['Вы', 'Иван', 'Юлия', 'Анна'];
+var playersTimes = [2500, 3000, 2000, 6000];
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -49,5 +49,5 @@ window.renderStatistics = function (ctx) {
 
   renderText(ctx, '16px PT Mono', '#000', 'Ура вы победили!', 'Список результатов:');
 
-  renderPlayerStatisctics(ctx, players, times);
+  renderPlayerStatisctics(ctx, names, playersTimes);
 };
