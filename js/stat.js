@@ -15,8 +15,6 @@ var BAR_GAP = 50;
 var TIME_GAP = 5;
 var PLAYER_BAR_COLOR = 'rgba(255, 0, 0, 1)';
 var PLAYERS_BAR_COLOR = 'rgba(0,0,255,';
-var names = ['Вы', 'Иван', 'Юлия', 'Анна'];
-var playersTimes = [2500, 3000, 2000, 6000];
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -32,7 +30,7 @@ var renderText = function (ctx, fontStyle, textColor, textLine1, textLine2) {
 
 var renderPlayerStatisctics = function (ctx, players, times) {
   for (var i = 0; i < players.length; i++) {
-    if (i === 0) {
+    if (players[i] === 'Вы') {
       ctx.fillStyle = PLAYER_BAR_COLOR;
     } else {
       ctx.fillStyle = PLAYERS_BAR_COLOR + Math.random() + ')';
@@ -43,11 +41,11 @@ var renderPlayerStatisctics = function (ctx, players, times) {
   }
 };
 
-window.renderStatistics = function (ctx) {
+window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X + SHADOW_GAP, CLOUD_Y + SHADOW_GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
 
   renderText(ctx, '16px PT Mono', '#000', 'Ура вы победили!', 'Список результатов:');
 
-  renderPlayerStatisctics(ctx, names, playersTimes);
+  renderPlayerStatisctics(ctx, names, times);
 };
