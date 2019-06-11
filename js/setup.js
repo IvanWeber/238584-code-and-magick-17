@@ -5,12 +5,12 @@ var getRandomInt = function (min, max) {
   return randomInt;
 };
 
-var showSetupBlock = function () {
-  var setupBlock = document.querySelector('.setup');
+var deleteHiddenClass = function (elementClass) {
+  var setupBlock = document.querySelector('.' + elementClass);
   setupBlock.classList.remove('hidden');
 };
 
-showSetupBlock();
+deleteHiddenClass('setup');
 
 var FIRST_NAME = [
   'Иван',
@@ -65,6 +65,29 @@ var name = getName(FIRST_NAME, LAST_NAME);
 var coatColor = getRandomElementFromArray(COAT_COLOR);
 var eyesColor = getRandomElementFromArray(EYES_COLOR);
 
+var getWizardDocumentFragment = function () {
+
+  var wizardDocumentFragment = new DocumentFragment();
+
+  for (var i = 0; i <= 3; i++) {
+    var template = document.querySelector('#similar-wizard-template').cloneNode(true);
+    var templateContent = template.content;
+    templateContent.querySelector('.setup-similar-label').textContent = getName(FIRST_NAME, LAST_NAME);
+    templateContent.querySelector('.wizard-coat').setAttribute('fill', getRandomElementFromArray(COAT_COLOR));
+    templateContent.querySelector('.wizard-eyes').setAttribute('fill', getRandomElementFromArray(EYES_COLOR));
+    wizardDocumentFragment.appendChild(templateContent);
+  }
+  return wizardDocumentFragment;
+};
+
+var insertDocumentFragment = function (DocumentFragment, parentClass) {
+  var section = document.querySelector('.' + parentClass);
+  section.appendChild(DocumentFragment);
+};
+
+insertDocumentFragment(getWizardDocumentFragment(), 'setup-similar-list');
+
+deleteHiddenClass('setup-similar');
 // console.log(name);
 // console.log(coatColor);
 // console.log(eyesColor);
