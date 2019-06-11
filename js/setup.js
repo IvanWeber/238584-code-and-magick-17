@@ -63,10 +63,6 @@ var getRandomElementFromArray = function (someArray) {
   return RandomElementFromArray;
 };
 
-var name = getName(FIRST_NAME, LAST_NAME);
-var coatColor = getRandomElementFromArray(COAT_COLOR);
-var eyesColor = getRandomElementFromArray(EYES_COLOR);
-
 var getWizardDocumentFragment = function (numberOfWizard) {
 
   var wizardDocumentFragment = new DocumentFragment();
