@@ -51,8 +51,6 @@ var deleteHiddenClass = function (elementClass) {
   setupBlock.classList.remove('hidden');
 };
 
-deleteHiddenClass('setup');
-
 var getName = function (firstName, lastName) {
   var name = firstName[getRandomInt(0, firstName.length - 1)] + ' ' + lastName[getRandomInt(0, lastName.length - 1)];
   return name;
@@ -82,6 +80,8 @@ var insertDocumentFragment = function (DocumentFragment, parentClass) {
   var section = document.querySelector('.' + parentClass);
   section.appendChild(DocumentFragment);
 };
+
+deleteHiddenClass('setup');
 
 insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
 
