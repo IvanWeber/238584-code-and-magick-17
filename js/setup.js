@@ -1,17 +1,5 @@
 'use strict';
 
-var getRandomInt = function (min, max) {
-  var randomInt = Math.round(Math.random() * (max - min));
-  return randomInt;
-};
-
-var deleteHiddenClass = function (elementClass) {
-  var setupBlock = document.querySelector('.' + elementClass);
-  setupBlock.classList.remove('hidden');
-};
-
-deleteHiddenClass('setup');
-
 var FIRST_NAME = [
   'Иван',
   'Хуан Себастьян',
@@ -51,6 +39,20 @@ var EYES_COLOR = [
   'green'
 ];
 
+var NUMBER_OF_WIZARDS = 4;
+
+var getRandomInt = function (min, max) {
+  var randomInt = Math.round(Math.random() * (max - min));
+  return randomInt;
+};
+
+var deleteHiddenClass = function (elementClass) {
+  var setupBlock = document.querySelector('.' + elementClass);
+  setupBlock.classList.remove('hidden');
+};
+
+deleteHiddenClass('setup');
+
 var getName = function (firstName, lastName) {
   var name = firstName[getRandomInt(0, firstName.length - 1)] + ' ' + lastName[getRandomInt(0, lastName.length - 1)];
   return name;
@@ -65,11 +67,11 @@ var name = getName(FIRST_NAME, LAST_NAME);
 var coatColor = getRandomElementFromArray(COAT_COLOR);
 var eyesColor = getRandomElementFromArray(EYES_COLOR);
 
-var getWizardDocumentFragment = function () {
+var getWizardDocumentFragment = function (numberOfWizard) {
 
   var wizardDocumentFragment = new DocumentFragment();
 
-  for (var i = 0; i <= 3; i++) {
+  for (var i = 0; i < numberOfWizard; i++) {
     var template = document.querySelector('#similar-wizard-template').cloneNode(true);
     var templateContent = template.content;
     templateContent.querySelector('.setup-similar-label').textContent = getName(FIRST_NAME, LAST_NAME);
@@ -85,9 +87,6 @@ var insertDocumentFragment = function (DocumentFragment, parentClass) {
   section.appendChild(DocumentFragment);
 };
 
-insertDocumentFragment(getWizardDocumentFragment(), 'setup-similar-list');
+insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
 
 deleteHiddenClass('setup-similar');
-// console.log(name);
-// console.log(coatColor);
-// console.log(eyesColor);
