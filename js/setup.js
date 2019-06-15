@@ -99,6 +99,12 @@ var closeCharacterWindowOnClickSetupOpen = function () {
   setupClose.addEventListener('click', setupCloseClickHandler);
 };
 
+var setElementTabIndexByClass = function (classElement, tabIndex) {
+  var element = document.querySelector('.' + classElement);
+  console.log(element);
+  element.tabIndex = tabIndex;
+};
+
 deleteHiddenClass('setup');
 
 insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
@@ -108,3 +114,5 @@ deleteHiddenClass('setup-similar');
 openCharacterWindowOnClickSetupOpen();
 
 closeCharacterWindowOnClickSetupOpen();
+
+setElementTabIndexByClass('setup-open-icon', 0);
