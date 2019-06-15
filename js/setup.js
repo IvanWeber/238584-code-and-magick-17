@@ -81,8 +81,30 @@ var insertDocumentFragment = function (DocumentFragment, parentClass) {
   section.appendChild(DocumentFragment);
 };
 
+var openCharacterWindowOnClickSetupOpen = function () {
+  var setupOpen = document.querySelector('.setup-open');
+  var setup = document.querySelector('.setup');
+  var setupOpenClickHandler = function () {
+    setup.classList.remove('hidden');
+  };
+  setupOpen.addEventListener('click', setupOpenClickHandler);
+};
+
+var closeCharacterWindowOnClickSetupOpen = function () {
+  var setupClose = document.querySelector('.setup-close');
+  var setup = document.querySelector('.setup');
+  var setupCloseClickHandler = function () {
+    setup.classList.add('hidden');
+  };
+  setupClose.addEventListener('click', setupCloseClickHandler);
+};
+
 deleteHiddenClass('setup');
 
 insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
 
 deleteHiddenClass('setup-similar');
+
+openCharacterWindowOnClickSetupOpen();
+
+closeCharacterWindowOnClickSetupOpen();
