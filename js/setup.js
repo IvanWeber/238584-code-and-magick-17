@@ -105,6 +105,17 @@ var setElementTabIndexByClass = function (classElement, tabIndex) {
   element.tabIndex = tabIndex;
 };
 
+var openCharacterWindowOnKeydownEnter = function () {
+  var setupOpenIcon = document.querySelector('.setup-open-icon');
+  var setup = document.querySelector('.setup');
+  var setupOpenIconKeydownEnterHandler = function (evt) {
+    if (evt.keyCode === 13) {
+      setup.classList.remove('hidden');
+    }
+  }
+  setupOpenIcon.addEventListener('keydown', setupOpenIconKeydownEnterHandler);
+}
+
 deleteHiddenClass('setup');
 
 insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
@@ -116,3 +127,5 @@ openCharacterWindowOnClickSetupOpen();
 closeCharacterWindowOnClickSetupOpen();
 
 setElementTabIndexByClass('setup-open-icon', 0);
+
+openCharacterWindowOnKeydownEnter();
