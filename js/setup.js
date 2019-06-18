@@ -59,11 +59,11 @@ var WIZARD_EYES_COLOR_SELECTION = [
 ];
 
 var WIZARD_FIREBALL_COLOR_SELECTION = [
-  'rgb(238, 72, 48)',
-  'rgb(48, 168, 238)',
-  'rgb(92, 230, 192)',
-  'rgb(232, 72, 213)',
-  'rgb(230, 232, 72)',
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848',
 ];
 
 var getRandomInt = function (min, max) {
@@ -220,12 +220,12 @@ var changeColorOfWizardFireballOnClick = function () {
   var wizardFireballClickHandler = function () {
     var wizardFireballColorInput = document.querySelector('input[name="fireball-color"]');
     for (var i = 0; i < WIZARD_FIREBALL_COLOR_SELECTION.length; i++) {
-      if ((WIZARD_FIREBALL_COLOR_SELECTION[i] === wizardFireball.style.backgroundColor || wizardFireball.style.color === undefined || wizardFireball.style.backgroundColor === '') && wizardFireball.style.backgroundColor !== WIZARD_FIREBALL_COLOR_SELECTION[WIZARD_FIREBALL_COLOR_SELECTION.length - 1]) {
+      if ((WIZARD_FIREBALL_COLOR_SELECTION[i] === wizardFireballColorInput.value || wizardFireballColorInput.value === undefined || wizardFireballColorInput.value === '') && wizardFireballColorInput.value !== WIZARD_FIREBALL_COLOR_SELECTION[WIZARD_FIREBALL_COLOR_SELECTION.length - 1]) {
         wizardFireball.style.backgroundColor = WIZARD_FIREBALL_COLOR_SELECTION[i + 1];
         wizardFireballColorInput.value = WIZARD_FIREBALL_COLOR_SELECTION[i + 1];
         break;
       }
-      if ((WIZARD_FIREBALL_COLOR_SELECTION[i] === wizardFireball.style.backgroundColor || wizardFireball.style.backgroundColor === undefined || wizardFireball.style.backgroundColor === '') && wizardFireball.style.backgroundColor === WIZARD_FIREBALL_COLOR_SELECTION[WIZARD_FIREBALL_COLOR_SELECTION.length - 1]) {
+      if ((WIZARD_FIREBALL_COLOR_SELECTION[i] === wizardFireballColorInput.value || wizardFireballColorInput.value === undefined || wizardFireballColorInput.value === '') && wizardFireballColorInput.value === WIZARD_FIREBALL_COLOR_SELECTION[WIZARD_FIREBALL_COLOR_SELECTION.length - 1]) {
         wizardFireball.style.backgroundColor = WIZARD_FIREBALL_COLOR_SELECTION[0];
         wizardFireballColorInput.value = WIZARD_FIREBALL_COLOR_SELECTION[0];
         break;
