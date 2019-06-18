@@ -59,12 +59,11 @@ var WIZARD_EYES_COLOR_SELECTION = [
 ];
 
 var WIZARD_FIREBALL_COLOR_SELECTION = [
-  '#ee4830',
-  '#30a8ee',
-  '#5ce6c0',
-  '#e848d5',
-  '#e6e848',
-
+  'rgb(238, 72, 48)',
+  'rgb(48, 168, 238)',
+  'rgb(92, 230, 192)',
+  'rgb(232, 72, 213)',
+  'rgb(230, 232, 72)',
 ];
 
 var getRandomInt = function (min, max) {
@@ -188,7 +187,7 @@ var changeColorOfWizardCoatOnClick = function () {
       }
       if ((WIZARD_COAT_COLOR_SELECTION[i] === wizardCoat.style.fill || wizardCoat.style.fill === undefined) && wizardCoat.style.fill === WIZARD_COAT_COLOR_SELECTION[WIZARD_COAT_COLOR_SELECTION.length - 1]) {
         wizardCoat.style.fill = WIZARD_COAT_COLOR_SELECTION[0];
-        wizardCoatInput.value = WIZARD_COAT_COLOR_SELECTION[i + 1];
+        wizardCoatInput.value = WIZARD_COAT_COLOR_SELECTION[0];
         break;
       }
     }
@@ -199,21 +198,41 @@ var changeColorOfWizardCoatOnClick = function () {
 var changeColorOfWizardEyesOnClick = function () {
   var wizardEyes = document.querySelector('.wizard-eyes');
   var wizardEyesClickHandler = function () {
-    var eyesColorInput = document.querySelector('input[name="eyes-color"]');
+    var wizardEyesColorInput = document.querySelector('input[name="eyes-color"]');
     for (var i = 0; i < WIZARD_EYES_COLOR_SELECTION.length; i++) {
       if ((WIZARD_EYES_COLOR_SELECTION[i] === wizardEyes.style.fill || wizardEyes.style.fill === undefined || wizardEyes.style.fill === '') && wizardEyes.style.fill !== WIZARD_EYES_COLOR_SELECTION[WIZARD_EYES_COLOR_SELECTION.length - 1]) {
         wizardEyes.style.fill = WIZARD_EYES_COLOR_SELECTION[i + 1];
-        eyesColorInput.value = WIZARD_EYES_COLOR_SELECTION[i + 1];
+        wizardEyesColorInput.value = WIZARD_EYES_COLOR_SELECTION[i + 1];
         break;
       }
       if ((WIZARD_EYES_COLOR_SELECTION[i] === wizardEyes.style.fill || wizardEyes.style.fill === undefined || wizardEyes.style.fill === '') && wizardEyes.style.fill === WIZARD_EYES_COLOR_SELECTION[WIZARD_EYES_COLOR_SELECTION.length - 1]) {
         wizardEyes.style.fill = WIZARD_EYES_COLOR_SELECTION[0];
-        eyesColorInput.value = WIZARD_EYES_COLOR_SELECTION[i + 1];
+        wizardEyesColorInput.value = WIZARD_EYES_COLOR_SELECTION[0];
         break;
       }
     }
   };
   wizardEyes.addEventListener('click', wizardEyesClickHandler);
+};
+
+var changeColorOfWizardFireballOnClick = function () {
+  var wizardFireball = document.querySelector('.setup-fireball-wrap');
+  var wizardFireballClickHandler = function () {
+    var wizardFireballColorInput = document.querySelector('input[name="fireball-color"]');
+    for (var i = 0; i < WIZARD_FIREBALL_COLOR_SELECTION.length; i++) {
+      if ((WIZARD_FIREBALL_COLOR_SELECTION[i] === wizardFireball.style.backgroundColor || wizardFireball.style.color === undefined || wizardFireball.style.backgroundColor === '') && wizardFireball.style.backgroundColor !== WIZARD_FIREBALL_COLOR_SELECTION[WIZARD_FIREBALL_COLOR_SELECTION.length - 1]) {
+        wizardFireball.style.backgroundColor = WIZARD_FIREBALL_COLOR_SELECTION[i + 1];
+        wizardFireballColorInput.value = WIZARD_FIREBALL_COLOR_SELECTION[i + 1];
+        break;
+      }
+      if ((WIZARD_FIREBALL_COLOR_SELECTION[i] === wizardFireball.style.backgroundColor || wizardFireball.style.backgroundColor === undefined || wizardFireball.style.backgroundColor === '') && wizardFireball.style.backgroundColor === WIZARD_FIREBALL_COLOR_SELECTION[WIZARD_FIREBALL_COLOR_SELECTION.length - 1]) {
+        wizardFireball.style.backgroundColor = WIZARD_FIREBALL_COLOR_SELECTION[0];
+        wizardFireballColorInput.value = WIZARD_FIREBALL_COLOR_SELECTION[0];
+        break;
+      }
+    }
+  };
+  wizardFireball.addEventListener('click', wizardFireballClickHandler);
 };
 
 insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
@@ -237,3 +256,5 @@ closeCharacterWindowOnKeydownEnterSetupClose();
 changeColorOfWizardCoatOnClick();
 
 changeColorOfWizardEyesOnClick();
+
+changeColorOfWizardFireballOnClick();
