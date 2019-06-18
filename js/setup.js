@@ -136,7 +136,7 @@ var stopPropagationOfKeydownEscOnFocusOnUserName = function () {
     }
   };
   setupUserName.addEventListener('keydown', setupUserNameKeydownEscHandler);
-}
+};
 
 insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
 
