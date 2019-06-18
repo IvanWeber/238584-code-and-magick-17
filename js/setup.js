@@ -91,7 +91,7 @@ var openCharacterWindowOnClickSetupOpen = function () {
   setupOpen.addEventListener('click', setupOpenClickHandler);
 };
 
-var closeCharacterWindowOnClickSetupOpen = function () {
+var closeCharacterWindowOnClickSetupClose = function () {
   var setupClose = document.querySelector('.setup-close');
   var setup = document.querySelector('.setup');
   var setupCloseClickHandler = function () {
@@ -105,7 +105,7 @@ var setElementTabIndexByClass = function (classElement, tabIndex) {
   element.tabIndex = tabIndex;
 };
 
-var openCharacterWindowOnKeydownEnter = function () {
+var openCharacterWindowOnKeydownEnterSetupOpen = function () {
   var setupOpenIcon = document.querySelector('.setup-open-icon');
   var setup = document.querySelector('.setup');
   var setupOpenIconKeydownEnterHandler = function (evt) {
@@ -138,16 +138,32 @@ var stopPropagationOfKeydownEscOnFocusOnUserName = function () {
   setupUserName.addEventListener('keydown', setupUserNameKeydownEscHandler);
 };
 
+var closeCharacterWindowOnKeydownEnterSetupClose = function () {
+  var setupClose = document.querySelector('.setup-close');
+  var setup = document.querySelector('.setup');
+  var setupOpenIconKeydownEnterHandler = function (evt) {
+    if (evt.keyCode === 13) {
+      setup.classList.add('hidden');
+      closeCharacterWindowOnKeydownEsc();
+    }
+  };
+  setupClose.addEventListener('keydown', setupOpenIconKeydownEnterHandler);
+};
+
 insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
 
 deleteHiddenClass('setup-similar');
 
 openCharacterWindowOnClickSetupOpen();
 
-closeCharacterWindowOnClickSetupOpen();
+closeCharacterWindowOnClickSetupClose();
 
 setElementTabIndexByClass('setup-open-icon', 0);
 
-openCharacterWindowOnKeydownEnter();
+setElementTabIndexByClass('setup-close', 0);
+
+openCharacterWindowOnKeydownEnterSetupOpen();
 
 stopPropagationOfKeydownEscOnFocusOnUserName();
+
+closeCharacterWindowOnKeydownEnterSetupClose();
