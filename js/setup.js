@@ -86,6 +86,7 @@ var openCharacterWindowOnClickSetupOpen = function () {
   var setup = document.querySelector('.setup');
   var setupOpenClickHandler = function () {
     setup.classList.remove('hidden');
+    closeCharacterWindowOnKeydownEsc();
   };
   setupOpen.addEventListener('click', setupOpenClickHandler);
 };
@@ -101,7 +102,6 @@ var closeCharacterWindowOnClickSetupOpen = function () {
 
 var setElementTabIndexByClass = function (classElement, tabIndex) {
   var element = document.querySelector('.' + classElement);
-  console.log(element);
   element.tabIndex = tabIndex;
 };
 
@@ -111,12 +111,23 @@ var openCharacterWindowOnKeydownEnter = function () {
   var setupOpenIconKeydownEnterHandler = function (evt) {
     if (evt.keyCode === 13) {
       setup.classList.remove('hidden');
+      closeCharacterWindowOnKeydownEsc();
     }
-  }
+  };
   setupOpenIcon.addEventListener('keydown', setupOpenIconKeydownEnterHandler);
-}
+};
 
-deleteHiddenClass('setup');
+var closeCharacterWindowOnKeydownEsc = function () {
+  var setup = document.querySelector('.setup');
+  var setupCloseIconKeydownEnterHandler = function (evt) {
+    if (evt.keyCode === 27) {
+      setup.classList.add('hidden');
+      document.removeEventListener('keydown', setupCloseIconKeydownEnterHandler);
+      console.log('test');
+    }
+  };
+  document.addEventListener('keydown', setupCloseIconKeydownEnterHandler);
+};
 
 insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
 
