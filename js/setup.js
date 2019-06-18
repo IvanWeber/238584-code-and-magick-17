@@ -119,15 +119,24 @@ var openCharacterWindowOnKeydownEnter = function () {
 
 var closeCharacterWindowOnKeydownEsc = function () {
   var setup = document.querySelector('.setup');
-  var setupCloseIconKeydownEnterHandler = function (evt) {
+  var setupCloseIconKeydownEscHandler = function (evt) {
     if (evt.keyCode === 27) {
       setup.classList.add('hidden');
-      document.removeEventListener('keydown', setupCloseIconKeydownEnterHandler);
-      console.log('test');
+      document.removeEventListener('keydown', setupCloseIconKeydownEscHandler);
     }
   };
-  document.addEventListener('keydown', setupCloseIconKeydownEnterHandler);
+  document.addEventListener('keydown', setupCloseIconKeydownEscHandler);
 };
+
+var stopPropagationOfKeydownEscOnFocusOnUserName = function () {
+  var setupUserName = document.querySelector('.setup-user-name');
+  var setupUserNameKeydownEscHandler = function (evt) {
+    if (evt.keyCode === 27) {
+      evt.stopPropagation();
+    }
+  };
+  setupUserName.addEventListener('keydown', setupUserNameKeydownEscHandler);
+}
 
 insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
 
@@ -140,3 +149,5 @@ closeCharacterWindowOnClickSetupOpen();
 setElementTabIndexByClass('setup-open-icon', 0);
 
 openCharacterWindowOnKeydownEnter();
+
+stopPropagationOfKeydownEscOnFocusOnUserName();
