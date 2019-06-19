@@ -66,6 +66,10 @@ var WIZARD_FIREBALL_COLOR_SELECTION = [
   '#e6e848',
 ];
 
+var ENTER_KEY_CODE = 13;
+
+var ESC_KEY_CODE = 27;
+
 var getRandomInt = function (min, max) {
   var randomInt = Math.round(Math.random() * (max - min));
   return randomInt;
@@ -145,7 +149,7 @@ var openCharacterWindowOnKeydownEnterSetupOpen = function () {
 var closeCharacterWindowOnKeydownEsc = function () {
   var setup = document.querySelector('.setup');
   var setupCloseIconKeydownEscHandler = function (evt) {
-    if (evt.keyCode === 27) {
+    if (evt.keyCode === ESC_KEY_CODE) {
       setup.classList.add('hidden');
       document.removeEventListener('keydown', setupCloseIconKeydownEscHandler);
     }
@@ -156,7 +160,7 @@ var closeCharacterWindowOnKeydownEsc = function () {
 var stopPropagationOfKeydownEscOnFocusOnUserName = function () {
   var setupUserName = document.querySelector('.setup-user-name');
   var setupUserNameKeydownEscHandler = function (evt) {
-    if (evt.keyCode === 27) {
+    if (evt.keyCode === ESC_KEY_CODE) {
       evt.stopPropagation();
     }
   };
@@ -167,7 +171,7 @@ var closeCharacterWindowOnKeydownEnterSetupClose = function () {
   var setupClose = document.querySelector('.setup-close');
   var setup = document.querySelector('.setup');
   var setupOpenIconKeydownEnterHandler = function (evt) {
-    if (evt.keyCode === 13) {
+    if (evt.keyCode === ENTER_KEY_CODE) {
       setup.classList.add('hidden');
       closeCharacterWindowOnKeydownEsc();
     }
