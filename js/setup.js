@@ -110,7 +110,7 @@ var insertDocumentFragment = function (DocumentFragment, parentClass) {
   section.appendChild(DocumentFragment);
 };
 
-var openCharacterWindowOnClickSetupOpen = function () {
+var initialiseOpeningCharacterWindowOnClickSetupOpen = function () {
   var setupOpen = document.querySelector('.setup-open');
   var setup = document.querySelector('.setup');
   var setupOpenClickHandler = function () {
@@ -120,7 +120,7 @@ var openCharacterWindowOnClickSetupOpen = function () {
   setupOpen.addEventListener('click', setupOpenClickHandler);
 };
 
-var closeCharacterWindowOnClickSetupClose = function () {
+var initialiseСlosingCharacterWindowOnClickSetupClose = function () {
   var setupClose = document.querySelector('.setup-close');
   var setup = document.querySelector('.setup');
   var setupCloseClickHandler = function () {
@@ -134,19 +134,19 @@ var setElementTabIndexByClass = function (classElement, tabIndex) {
   element.tabIndex = tabIndex;
 };
 
-var openCharacterWindowOnKeydownEnterSetupOpen = function () {
+var initialiseOpeningCharacterWindowOnKeydownEnterSetupOpen = function () {
   var setupOpenIcon = document.querySelector('.setup-open-icon');
   var setup = document.querySelector('.setup');
   var setupOpenIconKeydownEnterHandler = function (evt) {
     if (evt.keyCode === ENTER_KEY_CODE) {
       setup.classList.remove('hidden');
-      closeCharacterWindowOnKeydownEsc();
+      initialiseClosingCharacterWindowOnKeydownEsc();
     }
   };
   setupOpenIcon.addEventListener('keydown', setupOpenIconKeydownEnterHandler);
 };
 
-var closeCharacterWindowOnKeydownEsc = function () {
+var initialiseClosingCharacterWindowOnKeydownEsc = function () {
   var setup = document.querySelector('.setup');
   var setupCloseIconKeydownEscHandler = function (evt) {
     if (evt.keyCode === ESC_KEY_CODE) {
@@ -157,7 +157,7 @@ var closeCharacterWindowOnKeydownEsc = function () {
   document.addEventListener('keydown', setupCloseIconKeydownEscHandler);
 };
 
-var stopPropagationOfKeydownEscOnFocusOnUserName = function () {
+var initialiseStoppingPropagationOfKeydownEscOnFocusOnUserName = function () {
   var setupUserName = document.querySelector('.setup-user-name');
   var setupUserNameKeydownEscHandler = function (evt) {
     if (evt.keyCode === ESC_KEY_CODE) {
@@ -167,19 +167,19 @@ var stopPropagationOfKeydownEscOnFocusOnUserName = function () {
   setupUserName.addEventListener('keydown', setupUserNameKeydownEscHandler);
 };
 
-var closeCharacterWindowOnKeydownEnterSetupClose = function () {
+var initialiseClosingCharacterWindowOnKeydownEnterSetupClose = function () {
   var setupClose = document.querySelector('.setup-close');
   var setup = document.querySelector('.setup');
   var setupOpenIconKeydownEnterHandler = function (evt) {
     if (evt.keyCode === ENTER_KEY_CODE) {
       setup.classList.add('hidden');
-      closeCharacterWindowOnKeydownEsc();
+      initialiseClosingCharacterWindowOnKeydownEsc();
     }
   };
   setupClose.addEventListener('keydown', setupOpenIconKeydownEnterHandler);
 };
 
-var changeColorOfWizardCoatOnClick = function () {
+var initialiseChangingColorOfWizardCoatOnClick = function () {
   var wizardCoat = document.querySelector('.wizard-coat');
   var wizardCoatClickHandler = function () {
     var wizardCoatInput = document.querySelector('input[name="coat-color"]');
@@ -199,7 +199,7 @@ var changeColorOfWizardCoatOnClick = function () {
   wizardCoat.addEventListener('click', wizardCoatClickHandler);
 };
 
-var changeColorOfWizardEyesOnClick = function () {
+var initialiseChangingColorOfWizardEyesOnClick = function () {
   var wizardEyes = document.querySelector('.wizard-eyes');
   var wizardEyesClickHandler = function () {
     var wizardEyesColorInput = document.querySelector('input[name="eyes-color"]');
@@ -219,7 +219,7 @@ var changeColorOfWizardEyesOnClick = function () {
   wizardEyes.addEventListener('click', wizardEyesClickHandler);
 };
 
-var changeColorOfWizardFireballOnClick = function () {
+var initialiseChangingColorOfWizardFireballOnClick = function () {
   var wizardFireball = document.querySelector('.setup-fireball-wrap');
   var wizardFireballClickHandler = function () {
     var wizardFireballColorInput = document.querySelector('input[name="fireball-color"]');
@@ -243,22 +243,22 @@ insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-simi
 
 deleteHiddenClass('setup-similar');
 
-openCharacterWindowOnClickSetupOpen();
+initialiseOpeningCharacterWindowOnClickSetupOpen();
 
-closeCharacterWindowOnClickSetupClose();
+initialiseСlosingCharacterWindowOnClickSetupClose();
 
 setElementTabIndexByClass('setup-open-icon', 0);
 
 setElementTabIndexByClass('setup-close', 0);
 
-openCharacterWindowOnKeydownEnterSetupOpen();
+initialiseOpeningCharacterWindowOnKeydownEnterSetupOpen();
 
-stopPropagationOfKeydownEscOnFocusOnUserName();
+initialiseStoppingPropagationOfKeydownEscOnFocusOnUserName();
 
-closeCharacterWindowOnKeydownEnterSetupClose();
+initialiseClosingCharacterWindowOnKeydownEnterSetupClose();
 
-changeColorOfWizardCoatOnClick();
+initialiseChangingColorOfWizardCoatOnClick();
 
-changeColorOfWizardEyesOnClick();
+initialiseChangingColorOfWizardEyesOnClick();
 
-changeColorOfWizardFireballOnClick();
+initialiseChangingColorOfWizardFireballOnClick();
