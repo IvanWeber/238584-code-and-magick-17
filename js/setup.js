@@ -115,7 +115,7 @@ var initialiseOpeningCharacterWindowOnClickSetupOpen = function () {
   var setup = document.querySelector('.setup');
   var setupOpenClickHandler = function () {
     setup.classList.remove('hidden');
-    closeCharacterWindowOnKeydownEsc();
+    initialiseClosingCharacterWindowOnKeydownEsc();
   };
   setupOpen.addEventListener('click', setupOpenClickHandler);
 };
@@ -184,12 +184,15 @@ var initialiseChangingColorOfWizardCoatOnClick = function () {
   var wizardCoatClickHandler = function () {
     var wizardCoatInput = document.querySelector('input[name="coat-color"]');
     for (var i = 0; i < WIZARD_COAT_COLOR_SELECTION.length; i++) {
-      if ((WIZARD_COAT_COLOR_SELECTION[i] === wizardCoat.style.fill || wizardCoat.style.fill === undefined) && wizardCoat.style.fill !== WIZARD_COAT_COLOR_SELECTION[WIZARD_COAT_COLOR_SELECTION.length - 1]) {
+      var isWizardCoatFitsPrevCoatOrIsWizardCoatUndefined = WIZARD_COAT_COLOR_SELECTION[i] === wizardCoat.style.fill || wizardCoat.style.fill === undefined;
+      var isWizardCoatNotLastWizardCoat = wizardCoat.style.fill !== WIZARD_COAT_COLOR_SELECTION[WIZARD_COAT_COLOR_SELECTION.length - 1];
+      var isWizardCoatLastWizardCoat = wizardCoat.style.fill === WIZARD_COAT_COLOR_SELECTION[WIZARD_COAT_COLOR_SELECTION.length - 1];
+      if (isWizardCoatFitsPrevCoatOrIsWizardCoatUndefined && isWizardCoatNotLastWizardCoat) {
         wizardCoat.style.fill = WIZARD_COAT_COLOR_SELECTION[i + 1];
         wizardCoatInput.value = WIZARD_COAT_COLOR_SELECTION[i + 1];
         break;
       }
-      if ((WIZARD_COAT_COLOR_SELECTION[i] === wizardCoat.style.fill || wizardCoat.style.fill === undefined) && wizardCoat.style.fill === WIZARD_COAT_COLOR_SELECTION[WIZARD_COAT_COLOR_SELECTION.length - 1]) {
+      if (isWizardCoatFitsPrevCoatOrIsWizardCoatUndefined && isWizardCoatLastWizardCoat) {
         wizardCoat.style.fill = WIZARD_COAT_COLOR_SELECTION[0];
         wizardCoatInput.value = WIZARD_COAT_COLOR_SELECTION[0];
         break;
@@ -204,12 +207,15 @@ var initialiseChangingColorOfWizardEyesOnClick = function () {
   var wizardEyesClickHandler = function () {
     var wizardEyesColorInput = document.querySelector('input[name="eyes-color"]');
     for (var i = 0; i < WIZARD_EYES_COLOR_SELECTION.length; i++) {
-      if ((WIZARD_EYES_COLOR_SELECTION[i] === wizardEyes.style.fill || wizardEyes.style.fill === undefined || wizardEyes.style.fill === '') && wizardEyes.style.fill !== WIZARD_EYES_COLOR_SELECTION[WIZARD_EYES_COLOR_SELECTION.length - 1]) {
+      var isWizardEyesFitsPrevEyesOrIsWizardEyesUndefined = WIZARD_EYES_COLOR_SELECTION[i] === wizardEyes.style.fill || wizardEyes.style.fill === undefined || wizardEyes.style.fill === '';
+      var isWizardEyesNotLastWizardEyes = wizardEyes.style.fill !== WIZARD_EYES_COLOR_SELECTION[WIZARD_EYES_COLOR_SELECTION.length - 1];
+      var isWizardEyesLastWizardEyes = wizardEyes.style.fill === WIZARD_EYES_COLOR_SELECTION[WIZARD_EYES_COLOR_SELECTION.length - 1];
+      if (isWizardEyesFitsPrevEyesOrIsWizardEyesUndefined && isWizardEyesNotLastWizardEyes) {
         wizardEyes.style.fill = WIZARD_EYES_COLOR_SELECTION[i + 1];
         wizardEyesColorInput.value = WIZARD_EYES_COLOR_SELECTION[i + 1];
         break;
       }
-      if ((WIZARD_EYES_COLOR_SELECTION[i] === wizardEyes.style.fill || wizardEyes.style.fill === undefined || wizardEyes.style.fill === '') && wizardEyes.style.fill === WIZARD_EYES_COLOR_SELECTION[WIZARD_EYES_COLOR_SELECTION.length - 1]) {
+      if (isWizardEyesFitsPrevEyesOrIsWizardEyesUndefined && isWizardEyesLastWizardEyes) {
         wizardEyes.style.fill = WIZARD_EYES_COLOR_SELECTION[0];
         wizardEyesColorInput.value = WIZARD_EYES_COLOR_SELECTION[0];
         break;
@@ -224,12 +230,15 @@ var initialiseChangingColorOfWizardFireballOnClick = function () {
   var wizardFireballClickHandler = function () {
     var wizardFireballColorInput = document.querySelector('input[name="fireball-color"]');
     for (var i = 0; i < WIZARD_FIREBALL_COLOR_SELECTION.length; i++) {
-      if ((WIZARD_FIREBALL_COLOR_SELECTION[i] === wizardFireballColorInput.value || wizardFireballColorInput.value === undefined || wizardFireballColorInput.value === '') && wizardFireballColorInput.value !== WIZARD_FIREBALL_COLOR_SELECTION[WIZARD_FIREBALL_COLOR_SELECTION.length - 1]) {
+      var isWizardFireballFitsPrevFireballOrIsWizardFireballUndefined = WIZARD_FIREBALL_COLOR_SELECTION[i] === wizardFireballColorInput.value || wizardFireballColorInput.value === undefined || wizardFireballColorInput.value === '';
+      var isWizardFireballNotLastWizardFireball = wizardFireballColorInput.value !== WIZARD_FIREBALL_COLOR_SELECTION[WIZARD_FIREBALL_COLOR_SELECTION.length - 1];
+      var isWizardFireballLastWizardFireball = wizardFireballColorInput.value === WIZARD_FIREBALL_COLOR_SELECTION[WIZARD_FIREBALL_COLOR_SELECTION.length - 1];
+      if (isWizardFireballFitsPrevFireballOrIsWizardFireballUndefined && isWizardFireballNotLastWizardFireball) {
         wizardFireball.style.backgroundColor = WIZARD_FIREBALL_COLOR_SELECTION[i + 1];
         wizardFireballColorInput.value = WIZARD_FIREBALL_COLOR_SELECTION[i + 1];
         break;
       }
-      if ((WIZARD_FIREBALL_COLOR_SELECTION[i] === wizardFireballColorInput.value || wizardFireballColorInput.value === undefined || wizardFireballColorInput.value === '') && wizardFireballColorInput.value === WIZARD_FIREBALL_COLOR_SELECTION[WIZARD_FIREBALL_COLOR_SELECTION.length - 1]) {
+      if (isWizardFireballFitsPrevFireballOrIsWizardFireballUndefined && isWizardFireballLastWizardFireball) {
         wizardFireball.style.backgroundColor = WIZARD_FIREBALL_COLOR_SELECTION[0];
         wizardFireballColorInput.value = WIZARD_FIREBALL_COLOR_SELECTION[0];
         break;
