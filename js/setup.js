@@ -138,7 +138,7 @@ var openCharacterWindowOnKeydownEnterSetupOpen = function () {
   var setupOpenIcon = document.querySelector('.setup-open-icon');
   var setup = document.querySelector('.setup');
   var setupOpenIconKeydownEnterHandler = function (evt) {
-    if (evt.keyCode === 13) {
+    if (evt.keyCode === ENTER_KEY_CODE) {
       setup.classList.remove('hidden');
       closeCharacterWindowOnKeydownEsc();
     }
