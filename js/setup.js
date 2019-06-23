@@ -70,6 +70,11 @@ var ENTER_KEY_CODE = 13;
 
 var ESC_KEY_CODE = 27;
 
+var SETUP_STYLE_TOP_DEFAULT = '80px';
+
+var SETUP_STYLE_LEFT_DEFAULT = '50%';
+
+
 var getRandomInt = function (min, max) {
   var randomInt = Math.round(Math.random() * (max - min));
   return randomInt;
@@ -114,6 +119,8 @@ var initialiseOpeningCharacterWindowOnClickSetupOpen = function () {
   var setupOpen = document.querySelector('.setup-open');
   var setup = document.querySelector('.setup');
   var setupOpenClickHandler = function () {
+    setup.style.top = SETUP_STYLE_TOP_DEFAULT;
+    setup.style.left = SETUP_STYLE_LEFT_DEFAULT;
     setup.classList.remove('hidden');
     initialiseClosingCharacterWindowOnKeydownEsc();
   };
@@ -138,6 +145,8 @@ var initialiseOpeningCharacterWindowOnKeydownEnterSetupOpen = function () {
   var setupOpenIcon = document.querySelector('.setup-open-icon');
   var setup = document.querySelector('.setup');
   var setupOpenIconKeydownEnterHandler = function (evt) {
+    setup.style.top = SETUP_STYLE_TOP_DEFAULT;
+    setup.style.left = SETUP_STYLE_LEFT_DEFAULT;
     if (evt.keyCode === ENTER_KEY_CODE) {
       setup.classList.remove('hidden');
       initialiseClosingCharacterWindowOnKeydownEsc();
