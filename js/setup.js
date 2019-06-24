@@ -75,9 +75,37 @@
   var SETUP_STYLE_LEFT_DEFAULT = '50%';
 
 
+  var onError = function (message) {
+    console.error(message);
+  };
+
+  var onSuccess = function (data) {
+    console.log(data);
+    insertDocumentFragment(getWizardsDocumentFragment(data, NUMBER_OF_WIZARDS), 'setup-similar-list');
+  };
+
+
+
   var getRandomInt = function (min, max) {
     var randomInt = Math.round(Math.random() * (max - min));
     return randomInt;
+  };
+
+  var getWizardsDocumentFragment = function (wizardsDataArray, numberOfWizards) {
+
+    var wizardsDocumentFragment = new DocumentFragment();
+
+    for (var i = 0; i < numberOfWizards; i++) {
+      var randomIndexOfElementToBeDeleted = getRandomInt(0, wizardsDataArray.length - 1);
+      var template = document.querySelector('#similar-wizard-template').cloneNode(true);
+      var templateContent = template.content;
+      templateContent.querySelector('.setup-similar-label').textContent = wizardsDataArray[randomIndexOfElementToBeDeleted].name;
+      templateContent.querySelector('.wizard-coat').setAttribute('fill', wizardsDataArray[randomIndexOfElementToBeDeleted].colorCoat);
+      templateContent.querySelector('.wizard-eyes').setAttribute('fill', wizardsDataArray[randomIndexOfElementToBeDeleted].colorEyes);
+      wizardsDocumentFragment.appendChild(templateContent);
+      wizardsDataArray.splice(randomIndexOfElementToBeDeleted, 1);
+    }
+    return wizardsDocumentFragment;
   };
 
   var deleteHiddenClass = function (elementClass) {
@@ -119,6 +147,11 @@
     var setupOpen = document.querySelector('.setup-open');
     var setup = document.querySelector('.setup');
     var setupOpenClickHandler = function () {
+      var section = document.querySelector('.setup-similar-list');
+      while (section.firstChild) {
+        section.removeChild(section.firstChild);
+      }
+      window.load('https://js.dump.academy/code-and-magick/data', onSuccess, onError);
       setup.style.top = SETUP_STYLE_TOP_DEFAULT;
       setup.style.left = SETUP_STYLE_LEFT_DEFAULT;
       setup.classList.remove('hidden');
@@ -145,6 +178,11 @@
     var setupOpenIcon = document.querySelector('.setup-open-icon');
     var setup = document.querySelector('.setup');
     var setupOpenIconKeydownEnterHandler = function (evt) {
+      var section = document.querySelector('.setup-similar-list');
+      while (section.firstChild) {
+        section.removeChild(section.firstChild);
+      }
+      window.load('https://js.dump.academy/code-and-magick/data', onSuccess, onError);
       setup.style.top = SETUP_STYLE_TOP_DEFAULT;
       setup.style.left = SETUP_STYLE_LEFT_DEFAULT;
       if (evt.keyCode === ENTER_KEY_CODE) {
@@ -257,7 +295,7 @@
     wizardFireball.addEventListener('click', wizardFireballClickHandler);
   };
 
-  insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
+  // insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
 
   deleteHiddenClass('setup-similar');
 
