@@ -38,6 +38,13 @@
 
 
   var onError = function (message) {
+    var messageElement = document.querySelector('p');
+    var bodyElement = document.querySelector('body');
+    messageElement.textContent = message;
+    messageElement.style.color = 'red';
+    messageElement.style.fontSize = '32px';
+    messageElement.style.backgroundColor = 'white';
+    bodyElement.insertBefore(messageElement, bodyElement.firstChild);
   };
 
   var onSuccess = function (data) {
