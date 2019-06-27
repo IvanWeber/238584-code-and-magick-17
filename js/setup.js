@@ -1,43 +1,5 @@
 'use strict';
 (function () {
-  var FIRST_NAME = [
-    'Иван',
-    'Хуан Себастьян',
-    'Мария',
-    'Кристоф',
-    'Виктор',
-    'Юлия',
-    'Люпита',
-    'Вашингтон'
-  ];
-
-  var LAST_NAME = [
-    'да Марья',
-    'Верон',
-    'Мирабелла',
-    'Вальц',
-    'Онопко',
-    'Топольницкая',
-    'Нионго',
-    'Ирвинг'
-  ];
-
-  var COAT_COLOR = [
-    'rgb(101, 137, 164)',
-    'rgb(241, 43, 107)',
-    'rgb(146, 100, 161)',
-    'rgb(56, 159, 117)',
-    'rgb(215, 210, 55)',
-    'rgb(0, 0, 0)'
-  ];
-
-  var EYES_COLOR = [
-    'black',
-    'red',
-    'blue',
-    'yellow',
-    'green'
-  ];
 
   var NUMBER_OF_WIZARDS = 4;
 
@@ -76,14 +38,11 @@
 
 
   var onError = function (message) {
-    console.error(message);
   };
 
   var onSuccess = function (data) {
-    console.log(data);
     insertDocumentFragment(getWizardsDocumentFragment(data, NUMBER_OF_WIZARDS), 'setup-similar-list');
   };
-
 
 
   var getRandomInt = function (min, max) {
