@@ -72,16 +72,6 @@
     setupBlock.classList.remove('hidden');
   };
 
-  var getName = function (firstName, lastName) {
-    var name = firstName[getRandomInt(0, firstName.length - 1)] + ' ' + lastName[getRandomInt(0, lastName.length - 1)];
-    return name;
-  };
-
-  var getRandomElementFromArray = function (someArray) {
-    var RandomElementFromArray = someArray[getRandomInt(0, someArray.length - 1)];
-    return RandomElementFromArray;
-  };
-
   var insertDocumentFragment = function (DocumentFragment, parentClass) {
     var section = document.querySelector('.' + parentClass);
     section.appendChild(DocumentFragment);
@@ -238,8 +228,6 @@
     };
     wizardFireball.addEventListener('click', wizardFireballClickHandler);
   };
-
-  // insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
 
   deleteHiddenClass('setup-similar');
 
