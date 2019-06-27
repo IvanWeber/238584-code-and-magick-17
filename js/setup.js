@@ -1,43 +1,5 @@
 'use strict';
 (function () {
-  var FIRST_NAME = [
-    'Иван',
-    'Хуан Себастьян',
-    'Мария',
-    'Кристоф',
-    'Виктор',
-    'Юлия',
-    'Люпита',
-    'Вашингтон'
-  ];
-
-  var LAST_NAME = [
-    'да Марья',
-    'Верон',
-    'Мирабелла',
-    'Вальц',
-    'Онопко',
-    'Топольницкая',
-    'Нионго',
-    'Ирвинг'
-  ];
-
-  var COAT_COLOR = [
-    'rgb(101, 137, 164)',
-    'rgb(241, 43, 107)',
-    'rgb(146, 100, 161)',
-    'rgb(56, 159, 117)',
-    'rgb(215, 210, 55)',
-    'rgb(0, 0, 0)'
-  ];
-
-  var EYES_COLOR = [
-    'black',
-    'red',
-    'blue',
-    'yellow',
-    'green'
-  ];
 
   var NUMBER_OF_WIZARDS = 4;
 
@@ -75,39 +37,46 @@
   var SETUP_STYLE_LEFT_DEFAULT = '50%';
 
 
+  var onError = function (message) {
+    var messageElement = document.querySelector('p');
+    var bodyElement = document.querySelector('body');
+    messageElement.textContent = message;
+    messageElement.style.color = 'red';
+    messageElement.style.fontSize = '32px';
+    messageElement.style.backgroundColor = 'white';
+    bodyElement.insertBefore(messageElement, bodyElement.firstChild);
+  };
+
+  var onSuccess = function (data) {
+    insertDocumentFragment(getWizardsDocumentFragment(data, NUMBER_OF_WIZARDS), 'setup-similar-list');
+  };
+
+
   var getRandomInt = function (min, max) {
     var randomInt = Math.round(Math.random() * (max - min));
     return randomInt;
   };
 
+  var getWizardsDocumentFragment = function (wizardsDataArray, numberOfWizards) {
+
+    var wizardsDocumentFragment = new DocumentFragment();
+
+    for (var i = 0; i < numberOfWizards; i++) {
+      var randomIndexOfElementToBeDeleted = getRandomInt(0, wizardsDataArray.length - 1);
+      var template = document.querySelector('#similar-wizard-template').cloneNode(true);
+      var templateContent = template.content;
+      templateContent.querySelector('.setup-similar-label').textContent = wizardsDataArray[randomIndexOfElementToBeDeleted].name;
+      templateContent.querySelector('.wizard-coat').setAttribute('fill', wizardsDataArray[randomIndexOfElementToBeDeleted].colorCoat);
+      templateContent.querySelector('.wizard-eyes').setAttribute('fill', wizardsDataArray[randomIndexOfElementToBeDeleted].colorEyes);
+      wizardsDocumentFragment.appendChild(templateContent);
+      wizardsDataArray.splice(randomIndexOfElementToBeDeleted, 1);
+    }
+    return wizardsDocumentFragment;
+  };
+
   var deleteHiddenClass = function (elementClass) {
     var setupBlock = document.querySelector('.' + elementClass);
     setupBlock.classList.remove('hidden');
-  };
-
-  var getName = function (firstName, lastName) {
-    var name = firstName[getRandomInt(0, firstName.length - 1)] + ' ' + lastName[getRandomInt(0, lastName.length - 1)];
-    return name;
-  };
-
-  var getRandomElementFromArray = function (someArray) {
-    var RandomElementFromArray = someArray[getRandomInt(0, someArray.length - 1)];
-    return RandomElementFromArray;
-  };
-
-  var getWizardDocumentFragment = function (numberOfWizard) {
-
-    var wizardDocumentFragment = new DocumentFragment();
-
-    for (var i = 0; i < numberOfWizard; i++) {
-      var template = document.querySelector('#similar-wizard-template').cloneNode(true);
-      var templateContent = template.content;
-      templateContent.querySelector('.setup-similar-label').textContent = getName(FIRST_NAME, LAST_NAME);
-      templateContent.querySelector('.wizard-coat').setAttribute('fill', getRandomElementFromArray(COAT_COLOR));
-      templateContent.querySelector('.wizard-eyes').setAttribute('fill', getRandomElementFromArray(EYES_COLOR));
-      wizardDocumentFragment.appendChild(templateContent);
-    }
-    return wizardDocumentFragment;
   };
 
   var insertDocumentFragment = function (DocumentFragment, parentClass) {
@@ -119,6 +88,11 @@
     var setupOpen = document.querySelector('.setup-open');
     var setup = document.querySelector('.setup');
     var setupOpenClickHandler = function () {
+      var section = document.querySelector('.setup-similar-list');
+      while (section.firstChild) {
+        section.removeChild(section.firstChild);
+      }
+      window.load('https://js.dump.academy/code-and-magick/data', onSuccess, onError);
       setup.style.top = SETUP_STYLE_TOP_DEFAULT;
       setup.style.left = SETUP_STYLE_LEFT_DEFAULT;
       setup.classList.remove('hidden');
@@ -145,6 +119,11 @@
     var setupOpenIcon = document.querySelector('.setup-open-icon');
     var setup = document.querySelector('.setup');
     var setupOpenIconKeydownEnterHandler = function (evt) {
+      var section = document.querySelector('.setup-similar-list');
+      while (section.firstChild) {
+        section.removeChild(section.firstChild);
+      }
+      window.load('https://js.dump.academy/code-and-magick/data', onSuccess, onError);
       setup.style.top = SETUP_STYLE_TOP_DEFAULT;
       setup.style.left = SETUP_STYLE_LEFT_DEFAULT;
       if (evt.keyCode === ENTER_KEY_CODE) {
@@ -256,8 +235,6 @@
     };
     wizardFireball.addEventListener('click', wizardFireballClickHandler);
   };
-
-  insertDocumentFragment(getWizardDocumentFragment(NUMBER_OF_WIZARDS), 'setup-similar-list');
 
   deleteHiddenClass('setup-similar');
 
