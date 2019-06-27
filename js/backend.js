@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var TIMEOUT = 10000; // 10s
+
   window.load = function (url, onLoad, onError) {
     var xhr = new XMLHttpRequest();
 
@@ -22,7 +24,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000; // 10s
+    xhr.timeout = TIMEOUT;
 
     xhr.open('GET', url);
     xhr.send();

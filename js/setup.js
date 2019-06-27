@@ -123,21 +123,6 @@
     return RandomElementFromArray;
   };
 
-  var getWizardDocumentFragment = function (numberOfWizard) {
-
-    var wizardDocumentFragment = new DocumentFragment();
-
-    for (var i = 0; i < numberOfWizard; i++) {
-      var template = document.querySelector('#similar-wizard-template').cloneNode(true);
-      var templateContent = template.content;
-      templateContent.querySelector('.setup-similar-label').textContent = getName(FIRST_NAME, LAST_NAME);
-      templateContent.querySelector('.wizard-coat').setAttribute('fill', getRandomElementFromArray(COAT_COLOR));
-      templateContent.querySelector('.wizard-eyes').setAttribute('fill', getRandomElementFromArray(EYES_COLOR));
-      wizardDocumentFragment.appendChild(templateContent);
-    }
-    return wizardDocumentFragment;
-  };
-
   var insertDocumentFragment = function (DocumentFragment, parentClass) {
     var section = document.querySelector('.' + parentClass);
     section.appendChild(DocumentFragment);
