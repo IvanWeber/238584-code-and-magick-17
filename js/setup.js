@@ -119,11 +119,7 @@
     var setupOpenIcon = document.querySelector('.setup-open-icon');
     var setup = document.querySelector('.setup');
     var setupOpenIconKeydownEnterHandler = function (evt) {
-      var section = document.querySelector('.setup-similar-list');
-      while (section.firstChild) {
-        section.removeChild(section.firstChild);
-      }
-      window.load('https://js.dump.academy/code-and-magick/data', onSuccess, onError);
+      getWizardsDataFromRemoteServerAndRenderWizards();
       setup.style.top = SETUP_STYLE_TOP_DEFAULT;
       setup.style.left = SETUP_STYLE_LEFT_DEFAULT;
       if (evt.keyCode === ENTER_KEY_CODE) {
@@ -132,6 +128,14 @@
       }
     };
     setupOpenIcon.addEventListener('keydown', setupOpenIconKeydownEnterHandler);
+  };
+
+  var getWizardsDataFromRemoteServerAndRenderWizards = function () {
+    var section = document.querySelector('.setup-similar-list');
+    while (section.firstChild) {
+      section.removeChild(section.firstChild);
+    }
+    window.load('https://js.dump.academy/code-and-magick/data', onSuccess, onError);
   };
 
   var initialiseClosingCharacterWindowOnKeydownEsc = function () {
