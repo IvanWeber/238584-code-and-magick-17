@@ -48,16 +48,40 @@
   };
 
   var onSuccess = function (data) {
-    insertDocumentFragment(getWizardsDocumentFragment(data, NUMBER_OF_WIZARDS), 'setup-similar-list');
+    var dataSorted = getSortedArrayByDescending(sortWizardsBySimilarity(data));
+    insertDocumentFragment(getWizardsDocumentFragment(dataSorted, NUMBER_OF_WIZARDS), 'setup-similar-list');
   };
-
 
   var getRandomInt = function (min, max) {
     var randomInt = Math.round(Math.random() * (max - min));
     return randomInt;
   };
 
-  var getWizardsDocumentFragment = function (wizardsDataArray, numberOfWizards) {
+  var getSortedArrayByDescending = function (array) {
+    var arrayClone = array.slice();
+    arrayClone.sort(function (a, b) {
+      return b.priority - a.priority;
+    });
+    return arrayClone;
+  };
+
+  var sortWizardsBySimilarity = function (data) {
+    var arrayClone = data.slice();
+    var wizardCoat = document.querySelector('.wizard-coat');
+    var wizardEyes = document.querySelector('.wizard-eyes');
+    arrayClone.forEach(function (item) {
+      item.priority = 0;
+      if (item.colorCoat === wizardCoat.style.fill) {
+        item.priority += 2;
+      }
+      if (item.colorEyes === wizardEyes.style.fill) {
+        item.priority += 1;
+      }
+    });
+    return arrayClone;
+  };
+
+  var getWizardsDocumentFragmentRandom = function (wizardsDataArray, numberOfWizards) {
 
     var wizardsDocumentFragment = new DocumentFragment();
 
@@ -70,6 +94,22 @@
       templateContent.querySelector('.wizard-eyes').setAttribute('fill', wizardsDataArray[randomIndexOfElementToBeDeleted].colorEyes);
       wizardsDocumentFragment.appendChild(templateContent);
       wizardsDataArray.splice(randomIndexOfElementToBeDeleted, 1);
+    }
+    return wizardsDocumentFragment;
+  };
+
+  var getWizardsDocumentFragment = function (wizardsDataArray, numberOfWizards) {
+
+    var wizardsDocumentFragment = new DocumentFragment();
+
+    for (var i = 0; i < numberOfWizards; i++) {
+      var template = document.querySelector('#similar-wizard-template').cloneNode(true);
+      var templateContent = template.content;
+      templateContent.querySelector('.setup-similar-label').textContent = wizardsDataArray[i].name;
+      templateContent.querySelector('.wizard-coat').setAttribute('fill', wizardsDataArray[i].colorCoat);
+      templateContent.querySelector('.wizard-eyes').setAttribute('fill', wizardsDataArray[i].colorEyes);
+      wizardsDocumentFragment.appendChild(templateContent);
+      wizardsDataArray.splice(i, 1);
     }
     return wizardsDocumentFragment;
   };
@@ -87,16 +127,22 @@
   var initialiseOpeningCharacterWindowOnClickSetupOpen = function () {
     var setupOpen = document.querySelector('.setup-open');
     var setup = document.querySelector('.setup');
+    var lastTimeoutClickSetup;
     var setupOpenClickHandler = function () {
-      var section = document.querySelector('.setup-similar-list');
-      while (section.firstChild) {
-        section.removeChild(section.firstChild);
-      }
-      window.load('https://js.dump.academy/code-and-magick/data', onSuccess, onError);
       setup.style.top = SETUP_STYLE_TOP_DEFAULT;
       setup.style.left = SETUP_STYLE_LEFT_DEFAULT;
       setup.classList.remove('hidden');
       initialiseClosingCharacterWindowOnKeydownEsc();
+      if (lastTimeoutClickSetup) {
+        clearTimeout(lastTimeoutClickSetup);
+      }
+      lastTimeoutClickSetup = setTimeout(function () {
+        var section = document.querySelector('.setup-similar-list');
+        while (section.firstChild) {
+          section.removeChild(section.firstChild);
+        }
+        window.load('https://js.dump.academy/code-and-magick/data', onSuccess, onError);
+      }, 1000);
     };
     setupOpen.addEventListener('click', setupOpenClickHandler);
   };
@@ -118,13 +164,19 @@
   var initialiseOpeningCharacterWindowOnKeydownEnterSetupOpen = function () {
     var setupOpenIcon = document.querySelector('.setup-open-icon');
     var setup = document.querySelector('.setup');
+    var lastTimeoutEnterSetup;
     var setupOpenIconKeydownEnterHandler = function (evt) {
       if (evt.keyCode === ENTER_KEY_CODE) {
-        getWizardsDataFromRemoteServerAndRenderWizards();
         setup.style.top = SETUP_STYLE_TOP_DEFAULT;
         setup.style.left = SETUP_STYLE_LEFT_DEFAULT;
         setup.classList.remove('hidden');
         initialiseClosingCharacterWindowOnKeydownEsc();
+        if (lastTimeoutEnterSetup) {
+          clearTimeout(lastTimeoutEnterSetup);
+        }
+        lastTimeoutEnterSetup = setTimeout(function () {
+          getWizardsDataFromRemoteServerAndRenderWizards();
+        }, 1000);
       }
     };
     setupOpenIcon.addEventListener('keydown', setupOpenIconKeydownEnterHandler);
@@ -173,6 +225,7 @@
 
   var initialiseChangingColorOfWizardCoatOnClick = function () {
     var wizardCoat = document.querySelector('.wizard-coat');
+    var lastTimeoutCoatClickSetup;
     var wizardCoatClickHandler = function () {
       var wizardCoatInput = document.querySelector('input[name="coat-color"]');
       for (var i = 0; i < WIZARD_COAT_COLOR_SELECTION.length; i++) {
@@ -190,12 +243,19 @@
           break;
         }
       }
+      if (lastTimeoutCoatClickSetup) {
+        clearTimeout(lastTimeoutCoatClickSetup);
+      }
+      lastTimeoutCoatClickSetup = setTimeout(function () {
+        getWizardsDataFromRemoteServerAndRenderWizards();
+      }, 1000);
     };
     wizardCoat.addEventListener('click', wizardCoatClickHandler);
   };
 
   var initialiseChangingColorOfWizardEyesOnClick = function () {
     var wizardEyes = document.querySelector('.wizard-eyes');
+    var lastTimeoutEyesClickSetup;
     var wizardEyesClickHandler = function () {
       var wizardEyesColorInput = document.querySelector('input[name="eyes-color"]');
       for (var i = 0; i < WIZARD_EYES_COLOR_SELECTION.length; i++) {
@@ -213,6 +273,12 @@
           break;
         }
       }
+      if (lastTimeoutEyesClickSetup) {
+        clearTimeout(lastTimeoutEyesClickSetup);
+      }
+      lastTimeoutEyesClickSetup = setTimeout(function () {
+        getWizardsDataFromRemoteServerAndRenderWizards();
+      }, 1000);
     };
     wizardEyes.addEventListener('click', wizardEyesClickHandler);
   };
@@ -220,6 +286,7 @@
   var initialiseChangingColorOfWizardFireballOnClick = function () {
     var wizardFireball = document.querySelector('.setup-fireball-wrap');
     var wizardFireballClickHandler = function () {
+      getWizardsDataFromRemoteServerAndRenderWizards();
       var wizardFireballColorInput = document.querySelector('input[name="fireball-color"]');
       for (var i = 0; i < WIZARD_FIREBALL_COLOR_SELECTION.length; i++) {
         var isWizardFireballFitsPrevFireballOrIsWizardFireballUndefined = WIZARD_FIREBALL_COLOR_SELECTION[i] === wizardFireballColorInput.value || wizardFireballColorInput.value === undefined || wizardFireballColorInput.value === '';
