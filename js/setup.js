@@ -52,11 +52,6 @@
     insertDocumentFragment(getWizardsDocumentFragment(dataSorted, NUMBER_OF_WIZARDS), 'setup-similar-list');
   };
 
-  var getRandomInt = function (min, max) {
-    var randomInt = Math.round(Math.random() * (max - min));
-    return randomInt;
-  };
-
   var getSortedArrayByDescending = function (array) {
     var arrayClone = array.slice();
     arrayClone.sort(function (a, b) {
