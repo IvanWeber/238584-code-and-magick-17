@@ -81,23 +81,6 @@
     return arrayClone;
   };
 
-  var getWizardsDocumentFragmentRandom = function (wizardsDataArray, numberOfWizards) {
-
-    var wizardsDocumentFragment = new DocumentFragment();
-
-    for (var i = 0; i < numberOfWizards; i++) {
-      var randomIndexOfElementToBeDeleted = getRandomInt(0, wizardsDataArray.length - 1);
-      var template = document.querySelector('#similar-wizard-template').cloneNode(true);
-      var templateContent = template.content;
-      templateContent.querySelector('.setup-similar-label').textContent = wizardsDataArray[randomIndexOfElementToBeDeleted].name;
-      templateContent.querySelector('.wizard-coat').setAttribute('fill', wizardsDataArray[randomIndexOfElementToBeDeleted].colorCoat);
-      templateContent.querySelector('.wizard-eyes').setAttribute('fill', wizardsDataArray[randomIndexOfElementToBeDeleted].colorEyes);
-      wizardsDocumentFragment.appendChild(templateContent);
-      wizardsDataArray.splice(randomIndexOfElementToBeDeleted, 1);
-    }
-    return wizardsDocumentFragment;
-  };
-
   var getWizardsDocumentFragment = function (wizardsDataArray, numberOfWizards) {
 
     var wizardsDocumentFragment = new DocumentFragment();
