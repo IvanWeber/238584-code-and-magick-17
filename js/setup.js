@@ -119,10 +119,10 @@
     var setupOpenIcon = document.querySelector('.setup-open-icon');
     var setup = document.querySelector('.setup');
     var setupOpenIconKeydownEnterHandler = function (evt) {
-      getWizardsDataFromRemoteServerAndRenderWizards();
-      setup.style.top = SETUP_STYLE_TOP_DEFAULT;
-      setup.style.left = SETUP_STYLE_LEFT_DEFAULT;
       if (evt.keyCode === ENTER_KEY_CODE) {
+        getWizardsDataFromRemoteServerAndRenderWizards();
+        setup.style.top = SETUP_STYLE_TOP_DEFAULT;
+        setup.style.left = SETUP_STYLE_LEFT_DEFAULT;
         setup.classList.remove('hidden');
         initialiseClosingCharacterWindowOnKeydownEsc();
       }
