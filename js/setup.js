@@ -263,8 +263,8 @@
 
   var initialiseChangingColorOfWizardFireballOnClick = function () {
     var wizardFireball = document.querySelector('.setup-fireball-wrap');
+    var lastTimeoutFireballClickSetup;
     var wizardFireballClickHandler = function () {
-      getWizardsDataFromRemoteServerAndRenderWizards();
       var wizardFireballColorInput = document.querySelector('input[name="fireball-color"]');
       for (var i = 0; i < WIZARD_FIREBALL_COLOR_SELECTION.length; i++) {
         var isWizardFireballFitsPrevFireballOrIsWizardFireballUndefined = WIZARD_FIREBALL_COLOR_SELECTION[i] === wizardFireballColorInput.value || wizardFireballColorInput.value === undefined || wizardFireballColorInput.value === '';
@@ -281,6 +281,12 @@
           break;
         }
       }
+      if (lastTimeoutFireballClickSetup) {
+        clearTimeout(lastTimeoutFireballClickSetup);
+      }
+      lastTimeoutFireballClickSetup = setTimeout(function () {
+        getWizardsDataFromRemoteServerAndRenderWizards();
+      }, 1000);
     };
     wizardFireball.addEventListener('click', wizardFireballClickHandler);
   };
