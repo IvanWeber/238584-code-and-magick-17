@@ -201,9 +201,10 @@
     setupClose.addEventListener('keydown', setupOpenIconKeydownEnterHandler);
   };
 
+  var lastTimeout;
+
   var initialiseChangingColorOfWizardCoatOnClick = function () {
     var wizardCoat = document.querySelector('.wizard-coat');
-    var lastTimeoutCoatClickSetup;
     var wizardCoatClickHandler = function () {
       var wizardCoatInput = document.querySelector('input[name="coat-color"]');
       for (var i = 0; i < WIZARD_COAT_COLOR_SELECTION.length; i++) {
@@ -221,10 +222,10 @@
           break;
         }
       }
-      if (lastTimeoutCoatClickSetup) {
-        clearTimeout(lastTimeoutCoatClickSetup);
+      if (lastTimeout) {
+        clearTimeout(lastTimeout);
       }
-      lastTimeoutCoatClickSetup = setTimeout(function () {
+      lastTimeout = setTimeout(function () {
         getWizardsDataFromRemoteServerAndRenderWizards();
       }, 1000);
     };
@@ -233,7 +234,6 @@
 
   var initialiseChangingColorOfWizardEyesOnClick = function () {
     var wizardEyes = document.querySelector('.wizard-eyes');
-    var lastTimeoutEyesClickSetup;
     var wizardEyesClickHandler = function () {
       var wizardEyesColorInput = document.querySelector('input[name="eyes-color"]');
       for (var i = 0; i < WIZARD_EYES_COLOR_SELECTION.length; i++) {
@@ -251,10 +251,10 @@
           break;
         }
       }
-      if (lastTimeoutEyesClickSetup) {
-        clearTimeout(lastTimeoutEyesClickSetup);
+      if (lastTimeout) {
+        clearTimeout(lastTimeout);
       }
-      lastTimeoutEyesClickSetup = setTimeout(function () {
+      lastTimeout = setTimeout(function () {
         getWizardsDataFromRemoteServerAndRenderWizards();
       }, 1000);
     };
@@ -263,7 +263,6 @@
 
   var initialiseChangingColorOfWizardFireballOnClick = function () {
     var wizardFireball = document.querySelector('.setup-fireball-wrap');
-    var lastTimeoutFireballClickSetup;
     var wizardFireballClickHandler = function () {
       var wizardFireballColorInput = document.querySelector('input[name="fireball-color"]');
       for (var i = 0; i < WIZARD_FIREBALL_COLOR_SELECTION.length; i++) {
@@ -281,10 +280,10 @@
           break;
         }
       }
-      if (lastTimeoutFireballClickSetup) {
-        clearTimeout(lastTimeoutFireballClickSetup);
+      if (lastTimeout) {
+        clearTimeout(lastTimeout);
       }
-      lastTimeoutFireballClickSetup = setTimeout(function () {
+      lastTimeout = setTimeout(function () {
         getWizardsDataFromRemoteServerAndRenderWizards();
       }, 1000);
     };
